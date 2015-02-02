@@ -4,10 +4,8 @@ Wordpress Ansible
 ADD Plugin & theme repos to `ansible/roles/git-clone/tasks/main.yml`
 
 example code:
-````  # install a theme from git
-  - git: repo=https://github.com/Automattic/_s.git dest={{wp_install_dir}}/wp-content/themes/automattic
-````
 
+  `- git: repo=https://github.com/Automattic/_s.git dest={{wp_install_dir}}/wp-content/themes/automattic`
 
 
 Local Development
@@ -20,7 +18,7 @@ Prereqs:
 
 To start the dev environment run:
 
-```` vagrant up ````
+` vagrant up `
 
 Wordpress will be installed on the VM. You can add/edit plugins and themes locally and it will sync with the VM
 
