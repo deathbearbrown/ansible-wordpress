@@ -1,0 +1,14 @@
+---
+# Install nginx and set up group permissions
+
+  - name: make sure nginx is installed
+    apt: name=nginx state=present
+
+  - name: make sure nginx has a configuration file
+    template:
+      src=wfmu.conf
+      dest=/etc/nginx/conf.d/wfmu.conf
+      backup=no
+
+  - name: restart nginx
+    service: name=nginx state=restarted

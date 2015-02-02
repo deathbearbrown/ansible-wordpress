@@ -1,0 +1,28 @@
+---
+# Install PHP & any PHP.ini stuff
+
+  - name: Install php
+    apt: name={{item}} state=present
+    with_items:
+      - php5-fpm
+      - php5-mysql
+      - php5-gd
+      - php-apc
+      - php5-mcrypt
+      - php5-curl
+      - php5-intl
+      - php5-memcached
+      - php5-xdebug
+
+  - name: Copy over PHP.ini
+    template:
+      src=00-php.ini
+      dest=/etc/php5/fpm/conf.d
+
+  - name: Copy over wfmu.conf
+    template:
+      src=www.conf
+      dest=/etc/php5/fpm/pool.d
+
+  - name: Restart php5-fpm
+    service: name=php5-fpm state=restarted

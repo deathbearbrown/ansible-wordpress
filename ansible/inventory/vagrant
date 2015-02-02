@@ -1,0 +1,15 @@
+[appserver]
+192.168.50.20
+
+[appserver:vars]
+user=vagrant
+appname=wfmu
+server_hostname=wfmu-civi.dev
+wp_install_dir=/mnt/www
+wp_version=4.1
+wp_db_name=wordpress
+wp_db_user=root
+wp_db_password=''
+wp_db_host=localhost
+wp_table_prefix=ae_
+

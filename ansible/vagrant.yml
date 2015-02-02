@@ -1,0 +1,14 @@
+---
+# wfmu.yml
+-
+  hosts: appserver
+  remote_user: "{{ user }}"
+  sudo: yes
+  vars:
+  roles:
+    - updates
+    - nginx
+    - php
+    - mysql
+    - wordpress
+    - copy

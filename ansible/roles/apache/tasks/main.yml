@@ -1,0 +1,29 @@
+---
+# Install apache & set up configs
+
+  - name: Install Apache
+    apt: name=apache2 state=present
+
+  - name: Create fqdn configuration file (prevent apache error message 'Could not reliably determine the server's fully qualified domain name ...')
+    copy:
+      dest=/etc/apache2/{{conf}}/fqdn
+      content="ServerName localhost"
+
+  - name: WordPress virtualhost
+    copy:
+      src: wfmu.conf
+      dest: /etc/apache2/sites-available/wfmu.conf
+
+  - name: Enable WordPress virtualhost
+    file:
+      src: /etc/apache2/sites-available/wfmu.conf
+      dest: /etc/apache2/sites-enabled/wfmu
+      state: link
+
+  - name: Disable default Apache virtualhost
+    file:
+      dest: /etc/apache2/sites-enabled/000-default
+      state: absent
+
+  - name: Restart Apache
+    service: name=apache2 state=restarted

@@ -1,0 +1,38 @@
+---
+# Checkout wordpress
+
+- name: Wordpresss | Ensure that installation directory exists
+  file: state=directory dest={{wp_install_dir}} mode=770 owner={{user}} group={{appname}}
+
+- name: "Wordpresss | Download {{wp_version}} to /tmp"
+  get_url: url=http://wordpress.org/wordpress-{{wp_version}}.tar.gz force=no dest=/tmp/wordpress-{{wp_version}}.tar.gz
+
+- name: Wordpresss | Extract archive
+  unarchive: src=/tmp/wordpress-{{wp_version}}.tar.gz dest=/tmp copy=no
+
+- name: Remove the wp-content folder before moving it
+  command: rm -rf /tmp/wordpress/wp-content
+
+- name: "Wordpresss | Move extracted directory to {{wp_install_dir}}"
+  shell: /bin/mv -f /tmp/wordpress/* {{wp_install_dir}}/ creates={{wp_install_dir}}/wp-admin
+
+- name: Set permissions on wordpress files
+  command: chmod -R 770 {{wp_install_dir}}
+
+- name: Set Owner on wordpress files
+  command: chown -R {{user}} {{wp_install_dir}}
+
+- name: Set Group on wordpress files
+  command: chgrp -R {{appname}} {{wp_install_dir}}
+
+- name: Wordpresss | Remove wordpress-{{wp_version}}.tar.gz
+  file: path=/tmp/wordpress-{{wp_version}}.tar.gz state=absent
+
+- name: Wordpresss | Copy wp-config.php file
+  template: src=wp-config.php.j2 dest={{wp_install_dir}}/wp-config.php
+
+- name: add Wordpress IP to hosts because of DNS issue
+  lineinfile: dest=/etc/hosts regexp='^127\.0\.0\.1' line='66.155.40.202 api.wordpress.org' owner={{user}} group={{appname}} mode=0644
+
+- name: Restart php5-fpm
+  service: name=php5-fpm state=restarted

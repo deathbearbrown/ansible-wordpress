@@ -1,0 +1,17 @@
+---
+# Install Mysql & set up database
+
+  - name: Install MySQL
+    apt: pkg=mysql-server state=present
+
+  - name: Install python-mysqldb
+    apt: pkg=python-mysqldb state=present
+
+  - name: Install PHP MySQL bindings
+    apt: pkg=php5-mysql state=present
+
+  - name: Restart php5-fpm
+    service: name=php5-fpm state=restarted
+
+  - name: Setup WordPress database
+    mysql_db: name={{wp_db_name}} state=present

@@ -1,0 +1,13 @@
+---
+# Copy theme and plugins over
+
+  - name: Copy over wp-content
+    synchronize: src='../wp-content' dest={{wp_install_dir}}
+    tags:
+      - copy-wp-content
+
+  - name: Set user on wp-content
+    command: chown -R {{user}} {{wp_install_dir}}/wp-content
+
+  - name: Set group on wp-content
+    command: chgrp -R {{appname}} {{wp_install_dir}}/wp-content

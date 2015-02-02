@@ -1,0 +1,13 @@
+---
+# Update apt get
+  - name: Update apt cache
+    apt: update_cache=yes
+
+  - name: Create application group
+    group: name={{appname}}  state=present
+
+  - name: Populate application group
+    user: name={{item}} append=yes groups={{appname}}
+    with_items:
+      - www-data
+      - "{{user}}"
