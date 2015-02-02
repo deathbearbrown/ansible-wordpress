@@ -6,4 +6,4 @@
   sudo: yes
   vars:
   roles:
-    - copy
+    - git-clone

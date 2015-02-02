@@ -10,8 +10,8 @@
 - name: Wordpresss | Extract archive
   unarchive: src=/tmp/wordpress-{{wp_version}}.tar.gz dest=/tmp copy=no
 
-- name: Remove the wp-content folder before moving it
-  command: rm -rf /tmp/wordpress/wp-content
+# - name: Remove the wp-content folder before moving it
+#   command: rm -rf /tmp/wordpress/wp-content
 
 - name: "Wordpresss | Move extracted directory to {{wp_install_dir}}"
   shell: /bin/mv -f /tmp/wordpress/* {{wp_install_dir}}/ creates={{wp_install_dir}}/wp-admin

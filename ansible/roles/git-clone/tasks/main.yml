@@ -1,0 +1,17 @@
+---
+# git clone plugins
+
+  # install git
+  - name: Install git
+    apt: pkg=git
+
+  # install a theme from git
+  - git: repo=https://github.com/Automattic/_s.git dest={{wp_install_dir}}/wp-content/themes/automattic
+
+
+  # set permissions
+  - name: Set user on wp-content
+    command: chown -R {{user}} {{wp_install_dir}}/wp-content
+
+  - name: Set group on wp-content
+    command: chgrp -R {{appname}} {{wp_install_dir}}/wp-content

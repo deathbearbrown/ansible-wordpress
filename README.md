@@ -1,7 +1,13 @@
 Wordpress Ansible
 ===========
-//todo
-- [ ] put plugins in the inventory files and have them cloned via git
+
+ADD Plugin & theme repos to `ansible/roles/git-clone/tasks/main.yml`
+
+example code:
+````  # install a theme from git
+  - git: repo=https://github.com/Automattic/_s.git dest={{wp_install_dir}}/wp-content/themes/automattic
+````
+
 
 
 Local Development
@@ -40,9 +46,9 @@ Run the ansible playbooks using the following command:
 where staging.pem is the pem key for your staging server
 
 
-Copy changes to the VM
-======================
+To run just git checkout
+========================
 
 When you want to copy changes from your wp-content folder to your local VM, run the following:
 
-`ansible-playbook --private-key=~/.vagrant.d/insecure_private_key -i ansible/inventory/vagrant ansible/copy.yml -vvv`
+`ansible-playbook --private-key=~/.vagrant.d/insecure_private_key -i ansible/inventory/vagrant ansible/git-checkout.yml -vvv`
