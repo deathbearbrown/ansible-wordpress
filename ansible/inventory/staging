@@ -3,7 +3,7 @@
 
 [appserver:vars]
 user=ubuntu
-appname=wfmu
+appname=wordpress
 server_hostname=
 wp_install_dir=/mnt/www
 wp_version=4.1

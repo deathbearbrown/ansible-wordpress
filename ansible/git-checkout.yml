@@ -1,5 +1,4 @@
 ---
-# wfmu.yml
 -
   hosts: appserver
   remote_user: "{{ user }}"

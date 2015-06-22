@@ -1,5 +1,10 @@
 ---
 # Install PHP & any PHP.ini stuff
+  - name: Add the updated PHP PPA
+    shell: add-apt-repository -y ppa:ondrej/php5-5.6
+
+  - name: Update the local package cache
+    apt: update_cache=yes
 
   - name: Install php
     apt: name={{item}} state=present
@@ -19,7 +24,7 @@
       src=00-php.ini
       dest=/etc/php5/fpm/conf.d
 
-  - name: Copy over wfmu.conf
+  - name: Copy over wordpress.conf
     template:
       src=www.conf
       dest=/etc/php5/fpm/pool.d

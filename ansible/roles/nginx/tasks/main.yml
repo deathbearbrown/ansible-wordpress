@@ -6,8 +6,8 @@
 
   - name: make sure nginx has a configuration file
     template:
-      src=wfmu.conf
-      dest=/etc/nginx/conf.d/wfmu.conf
+      src=wordpress.conf
+      dest=/etc/nginx/conf.d/wordpress.conf
       backup=no
 
   - name: restart nginx
