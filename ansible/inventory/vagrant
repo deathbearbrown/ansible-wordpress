@@ -4,7 +4,7 @@
 [appserver:vars]
 user=vagrant
 appname=wordpress
-server_hostname=wordpress.dev
+server_hostname=wp.dev
 wp_install_dir=/mnt/www
 wp_version=4.1
 wp_db_name=wordpress
